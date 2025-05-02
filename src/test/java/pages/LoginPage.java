@@ -3,9 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import utils.WaitUtils;
+
 public class LoginPage {
 	
 	private WebDriver driver;
+	WaitUtils wait;
 	
 	//1. Locators
 	private By usernameField = By.id("user-name");
@@ -18,17 +21,18 @@ public class LoginPage {
 	public LoginPage(WebDriver driver)
 	{
 		this.driver=driver;
+		wait = new WaitUtils(driver);
 	}
 	
 	//3. Page Actions
 	public void enterUsername(String username)
 	{
-		driver.findElement(usernameField).sendKeys(username);
+		wait.waitForElementVisible(usernameField, 10).sendKeys(username);
 	}
 	
 	public void enterPassword(String password)
 	{
-		driver.findElement(passwordField).sendKeys(password);
+		wait.waitForElementVisible(passwordField, 10).sendKeys(password);
 	}
 	public void clickLogin()
 	{
